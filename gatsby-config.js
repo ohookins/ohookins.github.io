@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: "/paperairoplane.net", // Set to your repo name if not using username.github.io
   siteMetadata: {
     title: "adrift on a cosmic ocean",
     siteUrl: "https://paperairoplane.net",
