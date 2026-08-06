@@ -1,9 +1,9 @@
 {
-  "name": "paperairoplane.net",
-  "description": "My personal website",
+  "name": "ohookins.github.io",
+  "description": "Personal website for Oliver Hookins",
   "version": "3.0.0",
-  "author": "Oliver Hookins <ohookins@gmail.com>",
-  "homepage": "https://paperairoplane.net",
+  "author": "Oliver Hookins <ohookins@users.noreply.github.com>",
+  "homepage": "https://ohookins.github.io",
   "dependencies": {
     "date-fns": "^2.28.0",
     "disqus-react": "^1.1.2",
