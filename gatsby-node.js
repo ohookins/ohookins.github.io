@@ -38,16 +38,15 @@ exports.createPages = ({ graphql, actions }) => {
 
         const blogPostTemplate = path.resolve("src/templates/blog-post.js");
         const indexTemplate = path.resolve("src/templates/index.js");
+        const posts = result.data?.allContentfulPost?.edges || [];
 
-        paginate(
-          createPage,
-          indexTemplate,
-          "/page",
-          result.data.allContentfulPost.edges.length,
-          10
-        );
+        if (posts.length === 0) {
+          return;
+        }
 
-        result.data.allContentfulPost.edges.forEach(edge => {
+        paginate(createPage, indexTemplate, "/page", posts.length, 10);
+
+        posts.forEach(edge => {
           createPage({
             path: "/posts/" + edge.node.slug,
             component: blogPostTemplate,
