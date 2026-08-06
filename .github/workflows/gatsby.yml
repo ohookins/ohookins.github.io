@@ -82,6 +82,8 @@ jobs:
       - name: Build with Gatsby
         env:
           PREFIX_PATHS: 'true'
+          SPACE_ID: ${{ secrets.SPACE_ID }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: ${{ steps.detect-package-manager.outputs.manager }} run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
