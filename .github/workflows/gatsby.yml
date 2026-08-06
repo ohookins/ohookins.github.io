@@ -17,10 +17,9 @@ permissions:
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+# Prevent newer runs from canceling older ones; they will queue and wait for the current run to finish.
 concurrency:
-  group: "pages"
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false
 
 # Default to bash
@@ -64,7 +63,7 @@ jobs:
           PREFIX_PATHS: 'true'
           SPACE_ID: ${{ secrets.SPACE_ID }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        run: ${{ steps.detect-package-manager.outputs.manager }} run build
+        run: npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
