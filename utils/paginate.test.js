@@ -15,8 +15,10 @@ test('stops generating a next page link on the final paginated page', () => {
   );
 
   assert.equal(createdPages.length, 16);
+  assert.equal(createdPages[0].context.firstPath, '/');
   assert.equal(createdPages[0].context.nextPath, '/page/2');
   assert.equal(createdPages[14].context.nextPath, '/page/16');
   assert.equal(createdPages[15].context.pageID, 16);
+  assert.equal(createdPages[15].context.lastPath, '/page/16');
   assert.equal(createdPages[15].context.nextPath, '');
 });
