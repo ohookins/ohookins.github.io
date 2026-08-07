@@ -39,8 +39,12 @@ module.exports = (
         totalPages: pageCount,
         // The path to the previous paginated page (or an empty string)
         prevPath: paginationPath(basePath, index - 1, pageCount),
+        // The path to the first paginated page (or an empty string)
+        firstPath: paginationPath(basePath, 0, pageCount),
         // The path to the next paginated page (or an empty string)
         nextPath: paginationPath(basePath, index + 1, pageCount),
+        // The path to the last paginated page (or an empty string)
+        lastPath: paginationPath(basePath, pageCount - 1, pageCount),
         // Current page ID for displaying between chevrons
         pageID: index + 1
       }
