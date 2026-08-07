@@ -1,11 +1,21 @@
 version: 2
 updates:
-- package-ecosystem: npm
-  directory: "/"
-  schedule:
-    interval: daily
-    time: "09:00"
-    timezone: Australia/Sydney
-  pull-request-branch-name:
-    separator: "-"
-  open-pull-requests-limit: 5
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: daily
+      time: "09:00"
+      timezone: Australia/Sydney
+    pull-request-branch-name:
+      separator: "-"
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: daily
+      time: "09:00"
+      timezone: Australia/Sydney
+    pull-request-branch-name:
+      separator: "-"
+    open-pull-requests-limit: 5

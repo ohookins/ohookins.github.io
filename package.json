@@ -4,6 +4,9 @@
   "version": "3.0.0",
   "author": "Oliver Hookins <ohookins@users.noreply.github.com>",
   "homepage": "https://ohookins.github.io",
+  "engines": {
+    "node": ">=22"
+  },
   "dependencies": {
     "date-fns": "^2.28.0",
     "disqus-react": "^1.1.2",

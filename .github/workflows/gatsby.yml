@@ -17,10 +17,9 @@ permissions:
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+# Prevent newer runs from canceling older ones; they will queue and wait for the current run to finish.
 concurrency:
-  group: "pages"
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false
 
 # Default to bash
@@ -34,37 +33,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-      - name: Detect package manager
-        id: detect-package-manager
-        run: |
-          if [ -f "${{ github.workspace }}/package-lock.json" ]; then
-            echo "manager=npm" >> $GITHUB_OUTPUT
-            echo "command=install" >> $GITHUB_OUTPUT
-            exit 0
-          elif [ -f "${{ github.workspace }}/package.json" ]; then
-            echo "manager=npm" >> $GITHUB_OUTPUT
-            echo "command=install" >> $GITHUB_OUTPUT
-            exit 0
-          else
-            echo "Unable to determine package manager"
-            exit 1
-          fi
+        uses: actions/checkout@v7
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: "20"
-          cache: ${{ steps.detect-package-manager.outputs.manager }}
+          node-version: "22"
+          cache: npm
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
         with:
           # Automatically inject pathPrefix in your Gatsby configuration file.
           #
           # You may remove this line if you want to manage the configuration yourself.
           static_site_generator: gatsby
       - name: Restore cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: |
             public
@@ -73,21 +57,22 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gatsby-build-
       - name: Install dependencies
-        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+        run: npm install
       - name: Build with Gatsby
         env:
           PREFIX_PATHS: 'true'
           SPACE_ID: ${{ secrets.SPACE_ID }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        run: ${{ steps.detect-package-manager.outputs.manager }} run build
+        run: npm run build
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./public
 
   # Deployment job
   deploy:
     if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    timeout-minutes: 30
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -96,4 +81,6 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
+        with:
+          timeout: "1800000"
