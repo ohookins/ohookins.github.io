@@ -48,7 +48,7 @@ jobs:
           # You may remove this line if you want to manage the configuration yourself.
           static_site_generator: gatsby
       - name: Restore cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: |
             public
@@ -65,7 +65,7 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: npm run build
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./public
 
