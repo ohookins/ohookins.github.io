@@ -1,4 +1,7 @@
+const isContentfulConfigured = Boolean(process.env.SPACE_ID && process.env.ACCESS_TOKEN);
+
 module.exports = {
+  pathPrefix: "/paperairoplane.net", // Set to your repo name if not using username.github.io
   siteMetadata: {
     title: "adrift on a cosmic ocean",
     siteUrl: "https://paperairoplane.net",
@@ -9,13 +12,17 @@ module.exports = {
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",
     "gatsby-transformer-remark",
-    {
-      resolve: "gatsby-source-contentful",
-      options: {
-        spaceId: process.env.SPACE_ID,
-        accessToken: process.env.ACCESS_TOKEN
-      }
-    },
+    ...(isContentfulConfigured
+      ? [
+          {
+            resolve: "gatsby-source-contentful",
+            options: {
+              spaceId: process.env.SPACE_ID,
+              accessToken: process.env.ACCESS_TOKEN
+            }
+          }
+        ]
+      : []),
     {
       resolve: "gatsby-plugin-feed",
       options: {
