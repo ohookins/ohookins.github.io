@@ -44,10 +44,10 @@ class IndexPage extends React.Component {
             ))}
           </ul>
 
-          <div className="flex justify-center cabin b ma4">
-            <div className="ph2">
+          <div className="flex justify-center items-center cabin b ma4">
+            <div className="ph2 flex items-center">
               {firstPath && (
-                <Link to={firstPath}>
+                <Link to={firstPath} className="flex items-center">
                   <svg
                     className="w1"
                     data-icon={"chevronLeft"}
@@ -61,7 +61,7 @@ class IndexPage extends React.Component {
                     className="w1"
                     data-icon={"chevronLeft"}
                     viewBox={"0 0 32 32"}
-                    style={{ fill: `currentcolor` }}
+                    style={{ fill: `currentcolor`, marginLeft: `-0.3em` }}
                   >
                     <title>chevronLeft icon</title>
                     <path d="M20 1 L24 5 L14 16 L24 27 L20 31 L6 16 z" />
@@ -70,9 +70,9 @@ class IndexPage extends React.Component {
               )}
             </div>
 
-            <div className="ph2">
+            <div className="ph2 flex items-center">
               {prevPath && (
-                <Link to={prevPath}>
+                <Link to={prevPath} className="flex items-center">
                   <svg
                     className="w1"
                     data-icon={"chevronLeft"}
@@ -82,17 +82,17 @@ class IndexPage extends React.Component {
                     <title>chevronLeft icon</title>
                     <path d="M20 1 L24 5 L14 16 L24 27 L20 31 L6 16 z" />
                   </svg>
-                  <span className="ph2 f5 f4-ns f4-m v-btm">Previous</span>
+                  <span className="ph2 f5 f4-ns f4-m">Previous</span>
                 </Link>
               )}
             </div>
 
-            <div className="ph2 f5 f4-ns f4-m pageNumber">{pageID}</div>
+            <div className="ph2 flex items-center f5 f4-ns f4-m pageNumber">{pageID}</div>
 
-            <div className="ph2">
+            <div className="ph2 flex items-center">
               {nextPath && (
-                <Link to={nextPath}>
-                  <span className="ph2 f5 f4-ns f4-m v-btm">Next</span>
+                <Link to={nextPath} className="flex items-center">
+                  <span className="ph2 f5 f4-ns f4-m">Next</span>
                   <svg
                     className="w1"
                     data-icon={"chevronRight"}
@@ -106,9 +106,9 @@ class IndexPage extends React.Component {
               )}
             </div>
 
-            <div className="ph2">
+            <div className="ph2 flex items-center">
               {lastPath && (
-                <Link to={lastPath}>
+                <Link to={lastPath} className="flex items-center">
                   <svg
                     className="w1"
                     data-icon={"chevronRight"}
@@ -122,7 +122,7 @@ class IndexPage extends React.Component {
                     className="w1"
                     data-icon={"chevronRight"}
                     viewBox={"0 0 32 32"}
-                    style={{ fill: `currentcolor` }}
+                    style={{ fill: `currentcolor`, marginLeft: `-0.3em` }}
                   >
                     <title>chevronRight icon</title>
                     <path d="M12 1 L26 16 L12 31 L8 27 L18 16 L8 5 z" />
