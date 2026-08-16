@@ -24,7 +24,7 @@
     "react-helmet": "^6.1.0"
   },
   "scripts": {
-    "build": "gatsby build && pagefind --site public",
+    "build": "gatsby build && pagefind --site public --quiet",
     "develop": "gatsby develop",
     "serve": "gatsby serve",
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"src/**/*.js\"",
