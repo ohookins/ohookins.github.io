@@ -3,4 +3,8 @@
 - name: Homepage
   url: /
 - name: Page 2
-  url: /2
+  url: /page/2
+- name: Blog post
+  url: /posts/dont-use-aws-ses/
+- name: Tag page
+  url: /tags/aws

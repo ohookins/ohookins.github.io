@@ -1,6 +1,9 @@
 const path = require("path");
 const paginate = require("./utils/paginate");
 
+const slugify = (text) =>
+  text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
 
@@ -38,6 +41,7 @@ exports.createPages = ({ graphql, actions }) => {
 
         const blogPostTemplate = path.resolve("src/templates/blog-post.js");
         const indexTemplate = path.resolve("src/templates/index.js");
+        const tagTemplate = path.resolve("src/templates/tag.js");
         const posts = result.data?.allContentfulPost?.edges || [];
 
         if (posts.length === 0) {
@@ -45,6 +49,26 @@ exports.createPages = ({ graphql, actions }) => {
         }
 
         paginate(createPage, indexTemplate, "/page", posts.length, 10);
+
+        // Collect all unique tags
+        const tags = new Set();
+        posts.forEach(edge => {
+          if (edge.node.tags) {
+            edge.node.tags.forEach(tag => tags.add(tag.realname));
+          }
+        });
+
+        // Create a page for each tag
+        tags.forEach(tagName => {
+          createPage({
+            path: `/tags/${slugify(tagName)}`,
+            component: tagTemplate,
+            context: {
+              tagName: tagName,
+              tagSlug: slugify(tagName),
+            }
+          });
+        });
 
         posts.forEach(edge => {
           createPage({
