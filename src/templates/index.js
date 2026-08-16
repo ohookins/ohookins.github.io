@@ -5,6 +5,9 @@ import PublishLine from "../components/PublishLine";
 import "./index.css";
 
 const BlogPost = ({ node }) => {
+  const excerpt = node.body.childMarkdownRemark.excerpt
+    .replace(/<img[^>]*>/g, "");
+
   return (
     <li>
       <Link
@@ -20,7 +23,7 @@ const BlogPost = ({ node }) => {
       />
       <div
         dangerouslySetInnerHTML={{
-          __html: node.body.childMarkdownRemark.excerpt
+          __html: excerpt
         }}
         className="indexSummary"
       />
@@ -160,7 +163,7 @@ export const pageQuery = graphql`
           published
           body {
             childMarkdownRemark {
-              excerpt(pruneLength: 400)
+              excerpt(pruneLength: 400, format: HTML)
             }
           }
         }
