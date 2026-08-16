@@ -9,6 +9,11 @@ updates:
     pull-request-branch-name:
       separator: "-"
     open-pull-requests-limit: 5
+    groups:
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
 
   - package-ecosystem: github-actions
     directory: "/"
