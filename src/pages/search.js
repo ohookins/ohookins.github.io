@@ -2,37 +2,41 @@ import React, { useEffect, useRef } from "react";
 import Layout from "../components/Layout";
 
 const SearchPage = () => {
-  const searchRef = useRef(null);
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    const loadPagefind = async () => {
-      if (!searchRef.current) return;
+    if (!containerRef.current) return;
 
-      // Load Pagefind UI CSS
-      const link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.href = "/pagefind/pagefind-ui.css";
-      document.head.appendChild(link);
+    // Load Pagefind component UI CSS
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "/pagefind/pagefind-component-ui.css";
+    document.head.appendChild(link);
 
-      // Load and initialize Pagefind UI
-      const PagefindUI = await import(
-        /* webpackIgnore: true */ "/pagefind/pagefind-ui.js"
-      );
-      new PagefindUI.default({
-        element: searchRef.current,
-        showSubResults: true,
-        showImages: false,
-      });
+    // Load Pagefind component UI JS (web components)
+    const script = document.createElement("script");
+    script.src = "/pagefind/pagefind-component-ui.js";
+    script.type = "module";
+    script.onload = () => {
+      // Insert the web components after the script loads
+      containerRef.current.innerHTML = `
+        <pagefind-searchbox></pagefind-searchbox>
+        <pagefind-results></pagefind-results>
+      `;
     };
+    document.head.appendChild(script);
 
-    loadPagefind();
+    return () => {
+      document.head.removeChild(link);
+      document.head.removeChild(script);
+    };
   }, []);
 
   return (
     <Layout>
       <div>
         <h1 className="cabin f4 f3-ns">Search</h1>
-        <div ref={searchRef}></div>
+        <div ref={containerRef}></div>
       </div>
     </Layout>
   );
