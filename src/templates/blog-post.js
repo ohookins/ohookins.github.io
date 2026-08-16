@@ -26,8 +26,8 @@ class BlogPost extends Component {
 
     return (
       <Layout>
-        <div>
-          <h1 className="f4 f4-m f3-ns">{title}</h1>
+        <div data-pagefind-body>
+          <h1 className="f4 f4-m f3-ns" data-pagefind-meta="title">{title}</h1>
           <PublishLine
             author={author.firstName}
             published={published}
