@@ -5,6 +5,7 @@ import Background from "./header.jpg";
 const Header = () => (
   <div
     className="vh-10 dt w-100 tc bg-dark-gray cover"
+    data-pagefind-ignore
     style={{
       background: `url(${Background}) no-repeat center`
     }}

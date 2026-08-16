@@ -8,3 +8,8 @@
   url: /posts/dont-use-aws-ses/
 - name: Tag page
   url: /tags/aws
+- name: Search page
+  url: /search/
+- name: Search results
+  url: /search/?q=aws
+  wait_for_selector: "pagefind-results a"

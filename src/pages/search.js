@@ -20,9 +20,23 @@ const SearchPage = () => {
     script.onload = () => {
       // Insert the web components after the script loads
       containerRef.current.innerHTML = `
-        <pagefind-searchbox></pagefind-searchbox>
+        <pagefind-input></pagefind-input>
         <pagefind-results></pagefind-results>
       `;
+
+      // Check for a ?q= query parameter and pre-fill the search
+      const params = new URLSearchParams(window.location.search);
+      const query = params.get("q");
+      if (query) {
+        // Wait for the web component to render its internal input
+        setTimeout(() => {
+          const input = containerRef.current.querySelector("pagefind-input input");
+          if (input) {
+            input.value = query;
+            input.dispatchEvent(new Event("input", { bubbles: true }));
+          }
+        }, 100);
+      }
     };
     document.head.appendChild(script);
 
