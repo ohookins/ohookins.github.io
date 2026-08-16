@@ -1,0 +1,6 @@
+# Percy snapshot configuration
+# See: https://www.browserstack.com/docs/percy/take-percy-snapshots/snapshots-via-cli
+- name: Homepage
+  url: /
+- name: Page 2
+  url: /2
