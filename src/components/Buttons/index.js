@@ -17,6 +17,12 @@ const Buttons = () => (
         >
           About
         </Link>
+        <Link
+          to="/search/"
+          className="link dim ph4 ph3-m pv2 pv1-m mb2 dib white-90 bg-mid-gray"
+        >
+          Search
+        </Link>
         <a
           href="/rss.xml"
           className="link dim ph4 ph3-m pv2 pv1-m mb2 dib white-90 bg-mid-gray"
