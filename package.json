@@ -32,7 +32,7 @@
     "deploy": "gatsby build && gh-pages -d public"
   },
   "devDependencies": {
-    "@percy/cli": "^1.32.6",
+    "@percy/cli": "^1.32.7",
     "gatsby-cli": "^5.16.0",
     "gh-pages": "^6.3.0",
     "pagefind": "^1.5.2",
